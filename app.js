@@ -4,11 +4,11 @@ const portfolioData = {
     "name": "Satyam Dubey",
     "title": "Software Developer & Researcher",
     "description": "Passionate about eBPF, Post-Quantum Cryptography, AI, and next-generation networking technologies",
-    "location": "Available for opportunities"
+    "status": "Available for opportunities"
   },
   "skills": [
     "Extended Berkeley Packet Filter (eBPF)",
-    "Post-Quantum Cryptography",
+    "Post-Quantum Cryptography", 
     "Artificial Intelligence",
     "5G/6G Research",
     "Systems Programming",
@@ -23,42 +23,30 @@ const portfolioData = {
       "status": "In Progress"
     },
     {
-      "title": "Post-Quantum Key Exchange",
+      "title": "Post-Quantum Key Exchange", 
       "description": "Implementation of lattice-based cryptographic protocols for quantum-resistant communication",
       "technologies": ["Cryptography", "C++", "Mathematical Algorithms"],
       "status": "Research Phase"
     },
     {
       "title": "AI-Powered Network Optimization",
-      "description": "Machine learning system for optimizing 5G network performance and resource allocation",
+      "description": "Machine learning system for optimizing 5G network performance and resource allocation", 
       "technologies": ["Python", "TensorFlow", "Network Protocols", "AI/ML"],
       "status": "Completed"
-    },
-    {
-      "title": "6G Research Framework",
-      "description": "Research platform for studying next-generation wireless communication technologies",
-      "technologies": ["Research", "Simulation", "Networking", "Innovation"],
-      "status": "In Progress"
     }
   ],
   "experience": [
     {
       "title": "Research Intern",
-      "company": "Advanced Networking Lab",
+      "company": "Advanced Networking Lab", 
       "period": "2024 - Present",
       "description": "Conducting research on eBPF applications in high-speed networking and developing quantum-resistant protocols"
     },
     {
       "title": "Software Developer",
       "company": "Tech Innovation Hub",
-      "period": "2023 - 2024",
+      "period": "2023 - 2024", 
       "description": "Developed system-level applications focusing on network security and performance optimization"
-    },
-    {
-      "title": "AI Research Assistant",
-      "company": "University Research Center",
-      "period": "2022 - 2023",
-      "description": "Worked on machine learning applications for telecommunications and next-gen wireless systems"
     }
   ],
   "social_links": {
@@ -71,56 +59,28 @@ const portfolioData = {
       {
         "title": "Getting Started with eBPF for Network Programming",
         "date": "2024-12-15",
-        "readTime": "8 min read",
-        "description": "A comprehensive guide to understanding eBPF fundamentals and its applications in modern networking"
-      },
-      {
-        "title": "Advanced eBPF: Kernel Tracing and Performance Monitoring",
-        "date": "2024-11-28",
-        "readTime": "12 min read",
-        "description": "Deep dive into using eBPF for system observability and performance optimization"
+        "readTime": "8 min read"
       }
     ],
     "PQC": [
       {
-        "title": "Understanding Post-Quantum Cryptography: Preparing for the Quantum Era",
-        "date": "2024-12-10",
-        "readTime": "15 min read",
-        "description": "Exploring quantum-resistant cryptographic algorithms and their implementation challenges"
-      },
-      {
-        "title": "Lattice-Based Cryptography: Mathematical Foundations",
-        "date": "2024-11-15",
-        "readTime": "18 min read",
-        "description": "In-depth analysis of lattice-based cryptographic protocols and their security guarantees"
+        "title": "Understanding Post-Quantum Cryptography",
+        "date": "2024-12-10", 
+        "readTime": "15 min read"
       }
     ],
     "AI": [
       {
-        "title": "Machine Learning in Telecommunications: Current Trends",
+        "title": "Machine Learning in Telecommunications",
         "date": "2024-12-05",
-        "readTime": "10 min read",
-        "description": "How AI and ML are transforming network optimization and management"
-      },
-      {
-        "title": "Neural Networks for Network Traffic Prediction",
-        "date": "2024-11-20",
-        "readTime": "14 min read",
-        "description": "Building predictive models for network performance using deep learning"
+        "readTime": "10 min read"
       }
     ],
     "5G/6G Research": [
       {
-        "title": "The Evolution to 6G: Technical Challenges and Opportunities",
+        "title": "The Evolution to 6G: Technical Challenges",
         "date": "2024-12-01",
-        "readTime": "16 min read",
-        "description": "Exploring the key technologies and research directions for sixth-generation wireless systems"
-      },
-      {
-        "title": "5G Network Slicing: Implementation and Use Cases",
-        "date": "2024-11-10",
-        "readTime": "11 min read",
-        "description": "Understanding network slicing concepts and their practical applications in 5G networks"
+        "readTime": "16 min read"
       }
     ]
   }
@@ -129,54 +89,30 @@ const portfolioData = {
 // Current page state
 let currentPage = 'home';
 
-// Constants for layout
-const NAVBAR_HEIGHT = 80;
-const SCROLL_OFFSET = 20;
-
-// CRITICAL FIX: Enhanced smooth scroll with proper offset calculation
-function smoothScrollToElement(targetId) {
-  const element = document.getElementById(targetId);
-  if (!element) return;
-  
-  // Special handling for home section - scroll to absolute top
-  if (targetId === 'home') {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+// Utility Functions
+function smoothScroll(target) {
+  const element = document.querySelector(target);
+  if (element) {
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     });
-    return;
   }
-  
-  const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
-  const offsetPosition = elementTop - NAVBAR_HEIGHT - SCROLL_OFFSET;
-  
-  window.scrollTo({
-    top: Math.max(0, offsetPosition),
-    behavior: 'smooth'
-  });
 }
 
-// CRITICAL FIX: Improved scrollToSection function
 function scrollToSection(sectionId) {
-  console.log('Scrolling to section:', sectionId);
-  
   if (currentPage !== 'home') {
     showPage('home');
-    // Wait for page transition then scroll with proper offset
+    // Wait for page transition then scroll
     setTimeout(() => {
-      smoothScrollToElement(sectionId);
-    }, 350);
+      smoothScroll(`#${sectionId}`);
+    }, 300);
   } else {
-    smoothScrollToElement(sectionId);
+    smoothScroll(`#${sectionId}`);
   }
-  
-  // Update active nav state
-  setTimeout(() => {
-    updateActiveNavLink(sectionId);
-  }, 100);
 }
 
-// Fixed Page Management
+// Page Management
 function showPage(pageId) {
   console.log('showPage called with:', pageId);
   
@@ -195,7 +131,10 @@ function showPage(pageId) {
       blogsPage.style.display = 'block';
       currentPage = 'blogs';
       console.log('Switched to blogs page');
+      // Render blogs content
       renderBlogCategories();
+    } else {
+      console.error('Blogs page element not found');
     }
   } else {
     const mainPage = document.getElementById('mainPage');
@@ -204,13 +143,23 @@ function showPage(pageId) {
       mainPage.style.display = 'block';
       currentPage = 'home';
       console.log('Switched to home page');
+    } else {
+      console.error('Main page element not found');
     }
   }
   
   // Update navigation active states
   updateNavActiveStates(pageId);
   
-  // Scroll to top with smooth behavior
+  // Close mobile menu if open
+  const navMenu = document.getElementById('navMenu');
+  const hamburger = document.getElementById('hamburger');
+  if (navMenu && hamburger) {
+    navMenu.classList.remove('active');
+    hamburger.classList.remove('active');
+  }
+  
+  // Scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -243,11 +192,9 @@ function initializeApp() {
   
   // Show home page by default
   showPage('home');
-  
-  console.log('App initialized successfully');
 }
 
-// CRITICAL FIX: Enhanced Navigation Setup
+// Enhanced Navigation Setup with Fixed Links
 function setupNavigation() {
   // Handle navigation links with proper event handling
   const navLinks = document.querySelectorAll('.nav-link');
@@ -271,36 +218,26 @@ function setupNavigation() {
         const targetId = href.substring(1);
         console.log('Section link clicked:', targetId);
         
-        // Remove active class from all nav links first
-        navLinks.forEach(navLink => navLink.classList.remove('active'));
-        // Add active class to clicked link
-        this.classList.add('active');
-        
-        // Navigate to section with proper offset
-        scrollToSection(targetId);
+        // If we're not on home page, go to home first
+        if (currentPage !== 'home') {
+          showPage('home');
+          setTimeout(() => {
+            scrollToSection(targetId);
+          }, 300);
+        } else {
+          scrollToSection(targetId);
+        }
       }
     });
   });
 
-  // Handle brand link - FIXED to scroll to top properly
+  // Handle brand link
   const brandLink = document.querySelector('.brand-link');
   if (brandLink) {
     brandLink.addEventListener('click', function(e) {
       e.preventDefault();
       console.log('Brand link clicked');
-      
-      if (currentPage !== 'home') {
-        showPage('home');
-      } else {
-        // If already on home, scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        // Update nav state
-        const homeNavLink = document.querySelector('.nav-link[href="#home"]');
-        if (homeNavLink) {
-          navLinks.forEach(navLink => navLink.classList.remove('active'));
-          homeNavLink.classList.add('active');
-        }
-      }
+      showPage('home');
     });
   }
 
@@ -315,12 +252,19 @@ function setupNavigation() {
         showPage('blogs');
       } else if (href && href.startsWith('#')) {
         const targetId = href.substring(1);
-        scrollToSection(targetId);
+        if (currentPage !== 'home') {
+          showPage('home');
+          setTimeout(() => {
+            scrollToSection(targetId);
+          }, 300);
+        } else {
+          scrollToSection(targetId);
+        }
       }
     });
   });
 
-  // CRITICAL FIX: Mobile hamburger menu
+  // Mobile hamburger menu
   const hamburger = document.getElementById('hamburger');
   const navMenu = document.getElementById('navMenu');
   
@@ -349,9 +293,11 @@ function setupNavigation() {
   }
 }
 
-// CRITICAL FIX: Enhanced Scroll Handler with improved section detection
+// Enhanced Scroll Handler for Transparent Navigation
 function setupScrollHandler() {
   const navbar = document.getElementById('navbar');
+  
+  // Throttled scroll handler for performance
   let ticking = false;
   
   function updateNavbar() {
@@ -364,10 +310,8 @@ function setupScrollHandler() {
       navbar.classList.remove('navbar--scrolled');
     }
     
-    // Update active nav links for home page sections only
-    if (currentPage === 'home') {
-      updateActiveNavLinkOnScroll();
-    }
+    // Update active nav links for home page sections
+    updateActiveNavLink();
     
     // Update back to top button
     const backToTopBtn = document.getElementById('backToTop');
@@ -391,65 +335,8 @@ function setupScrollHandler() {
   
   window.addEventListener('scroll', requestTick);
   
-  // Initial call
+  // Initial call to set correct state
   updateNavbar();
-}
-
-// CRITICAL FIX: Improved active navigation link highlighting with better section detection
-function updateActiveNavLinkOnScroll() {
-  if (currentPage !== 'home') return;
-  
-  const sections = document.querySelectorAll('#mainPage section[id]');
-  const navLinks = document.querySelectorAll('.nav-link[href^="#"]:not([href="#blogs"])');
-  
-  let currentSection = 'home'; // Default to home
-  const scrollPosition = window.pageYOffset;
-  const viewportHeight = window.innerHeight;
-  
-  // Special handling for very top of page
-  if (scrollPosition < 100) {
-    currentSection = 'home';
-  } else {
-    // Find the section that's most visible in the viewport
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - NAVBAR_HEIGHT - 50;
-      const sectionBottom = sectionTop + section.offsetHeight;
-      const sectionId = section.getAttribute('id');
-      
-      // Check if section is in view
-      if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-        currentSection = sectionId;
-      }
-    });
-    
-    // Special handling for contact section at bottom of page
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      const contactTop = contactSection.offsetTop - NAVBAR_HEIGHT - 100;
-      if (scrollPosition >= contactTop) {
-        currentSection = 'contact';
-      }
-    }
-  }
-  
-  // Update nav link active states
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    const href = link.getAttribute('href');
-    if (href === `#${currentSection}`) {
-      link.classList.add('active');
-    }
-  });
-}
-
-function updateActiveNavLink(sectionId) {
-  const navLinks = document.querySelectorAll('.nav-link');
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === `#${sectionId}`) {
-      link.classList.add('active');
-    }
-  });
 }
 
 // Render Projects
@@ -480,7 +367,6 @@ function renderProjects() {
   }).join('');
 
   projectsGrid.innerHTML = projectsHTML;
-  console.log('Projects rendered successfully');
 }
 
 // Render Experience
@@ -502,10 +388,9 @@ function renderExperience() {
   `).join('');
 
   experienceTimeline.innerHTML = experienceHTML;
-  console.log('Experience rendered successfully');
 }
 
-// CRITICAL FIX: Blog Categories Rendering
+// Blog Categories Rendering
 function renderBlogCategories() {
   const blogCategoriesContainer = document.getElementById('blogCategories');
   if (!blogCategoriesContainer) {
@@ -523,16 +408,21 @@ function renderBlogCategories() {
   };
 
   const categoriesHTML = Object.entries(portfolioData.blogs).map(([category, posts]) => {
-    const postsHTML = posts.map(post => `
-      <div class="blog-post">
-        <h4>${post.title}</h4>
-        <p>${post.description}</p>
-        <div class="blog-meta">
-          <span>${post.readTime} • ${post.date}</span>
-          <a href="https://medium.com/@satyam012005" target="_blank" rel="noopener noreferrer">Read More →</a>
+    const postsHTML = posts.map(post => {
+      // Extract excerpt from title for demo purposes
+      const excerpt = `Deep dive into ${category.toLowerCase()} technologies and their practical applications in modern software development.`;
+      
+      return `
+        <div class="blog-post">
+          <h4>${post.title}</h4>
+          <p>${excerpt}</p>
+          <div class="blog-meta">
+            <span>${post.readTime} • ${post.date}</span>
+            <a href="${portfolioData.social_links.medium}" target="_blank" rel="noopener noreferrer">Read More →</a>
+          </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     return `
       <div class="blog-category">
@@ -551,32 +441,17 @@ function renderBlogCategories() {
   console.log('Blog categories rendered successfully');
 }
 
-// FIXED: Back to Top Button
+// Back to Top Button
 function setupBackToTop() {
   const backToTopBtn = document.getElementById('backToTop');
   if (!backToTopBtn) return;
 
   backToTopBtn.addEventListener('click', function(e) {
     e.preventDefault();
-    
     if (currentPage === 'blogs') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      // Always go to home section and scroll to top
-      if (currentPage !== 'home') {
-        showPage('home');
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 300);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        // Update nav state to show Home as active
-        const homeNavLink = document.querySelector('.nav-link[href="#home"]');
-        if (homeNavLink) {
-          document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-          homeNavLink.classList.add('active');
-        }
-      }
+      scrollToSection('home');
     }
   });
 }
@@ -600,7 +475,7 @@ function setupIntersectionObserver() {
 
   // Wait for content to be rendered before observing
   setTimeout(() => {
-    const animateElements = document.querySelectorAll('.project-card, .experience-item, .stat-card, .blog-category');
+    const animateElements = document.querySelectorAll('.project-card, .experience-item, .stat-card');
     animateElements.forEach((el, index) => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(30px)';
@@ -610,7 +485,34 @@ function setupIntersectionObserver() {
   }, 100);
 }
 
-// CRITICAL FIX: Keyboard navigation support
+// Active navigation link highlighting for home page sections
+function updateActiveNavLink() {
+  if (currentPage !== 'home') return;
+  
+  const sections = document.querySelectorAll('#mainPage section[id]');
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+  
+  let currentSection = '';
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 120;
+    const sectionHeight = section.offsetHeight;
+    
+    if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+      currentSection = section.getAttribute('id');
+    }
+  });
+  
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    const href = link.getAttribute('href');
+    if (href === `#${currentSection}`) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Keyboard navigation support
 document.addEventListener('keydown', function(e) {
   // ESC key to close mobile menu
   if (e.key === 'Escape') {
@@ -625,27 +527,24 @@ document.addEventListener('keydown', function(e) {
   // Home key to go to home
   if (e.key === 'Home' && e.ctrlKey) {
     e.preventDefault();
-    scrollToSection('home');
+    showPage('home');
   }
 });
 
-// Handle browser back/forward buttons
-window.addEventListener('popstate', function(e) {
-  // Handle browser navigation if needed
-  console.log('Browser navigation detected');
+// Handle window resize to close mobile menu
+window.addEventListener('resize', function() {
+  const navMenu = document.getElementById('navMenu');
+  const hamburger = document.getElementById('hamburger');
+  
+  if (window.innerWidth > 768) {
+    if (navMenu && hamburger) {
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+    }
+  }
 });
 
 // Export functions for global access
 window.scrollToSection = scrollToSection;
 window.showPage = showPage;
 window.portfolioData = portfolioData;
-
-// Additional utility functions
-window.goToTop = function() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-// Log initialization
-console.log('Satyam Dubey Portfolio - JavaScript Loaded Successfully');
-console.log('Navigation overlap issues fixed with proper scroll offsets');
-console.log('All navigation bugs resolved - Home link, Contact detection, and scroll behavior improved');
