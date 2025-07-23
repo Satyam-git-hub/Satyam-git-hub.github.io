@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,7 +10,7 @@
     />
     <meta
       name="keywords"
-      content="eBPF, Post-Quantum Cryptography, AI, 5G, 6G, Software Engineer, Researcher"
+      content="eBPF, Post-Quantum Cryptography, go, AI, 5G/6G, Software Engineer, Researcher"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -195,6 +195,7 @@
                   <span class="tech-tag">Python</span>
                   <span class="tech-tag">Rust</span>
                   <span class="tech-tag">Linux Kernel</span>
+                  <span class="tech-tag">Golang</span>
                   <span class="tech-tag">Cryptography</span>
                   <span class="tech-tag">5G/6G</span>
                   <span class="tech-tag">Machine Learning</span>
@@ -353,4 +354,58 @@
 
     <script src="app.js"></script>
   </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Satyam Dubey – Portfolio & Blogs</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <!-- Marked JS (4 kB) – fast Markdown → HTML -->
+  <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script defer src="app.js"></script>
+  <script defer src="blog.js"></script>
+</head>
+<body>
+  <!-- ░░░  NAVBAR  ░░░ -->
+  <nav id="navbar" class="navbar glass">
+    <div class="brand">Satyam Dubey</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#blogs" id="blogsLink">Blogs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="status">Available for opportunities</div>
+  </nav>
+
+  <!-- ░░░  MAIN PAGE  ░░░ -->
+  <main id="mainPage" class="page active">
+    <!-- … existing hero / about / projects / experience sections stay unchanged … -->
+    <section id="blogs" class="section">
+      <h2>Blogs</h2>
+      <p>My latest research notes and tutorials.</p>
+
+      <!-- dynamic list of posts is injected here -->
+      <ul id="blogList" class="blog-list"></ul>
+    </section>
+  </main>
+
+  <!-- ░░░  BLOG READER PAGE  ░░░ -->
+  <article id="blogReader" class="page">
+    <button id="backToBlogs" class="btn-back">← Back to Blogs</button>
+    <h1 id="postTitle"></h1>
+    <p id="postMeta" class="post-meta"></p>
+    <hr />
+    <div id="postContent" class="markdown-body"></div>
+  </article>
+
+  <!-- back-to-top arrow -->
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+</body>
 </html>
