@@ -1,10 +1,7 @@
-/* =========  BLOG DATA  =========
- * Each blog object:
- *   slug:  filename (without .md) stored in /blogs/
- *   title: display name
- *   date : ISO string or "Month YYYY"
- *   tags : array of topics (for future filters)
- */
+/* =========  BLOG “DATABASE”  =========
+   Add new entries here and drop matching .md
+   files in /blogs/
+*/
 const BLOGS = [
   {
     slug: "understanding-post-quantum-cryptography",
@@ -14,30 +11,16 @@ const BLOGS = [
   },
 ];
 
-/* =========  ELEMENTS  ========= */
+/* =========  ELEMENT HOOKS  ========= */
 const blogListEl = document.getElementById("blogList");
-const blogReader = document.getElementById("blogReader");
 const mainPage = document.getElementById("mainPage");
+const blogReader = document.getElementById("blogReader");
 const postTitleEl = document.getElementById("postTitle");
 const postMetaEl = document.getElementById("postMeta");
 const postContentEl = document.getElementById("postContent");
 const backToBlogs = document.getElementById("backToBlogs");
 
-/* =========  RENDER BLOG LIST  ========= */
-function renderBlogList() {
-  blogListEl.innerHTML = "";
-  BLOGS.forEach((post) => {
-    const li = document.createElement("li");
-    li.className = "blog-card";
-    li.innerHTML = `
-      <h3>${post.title}</h3>
-      <span class="blog-date">${formatDate(post.date)}</span>
-      <span class="blog-tags">${post.tags.join(", ")}</span>
-    `;
-    li.onclick = () => openPost(post);
-    blogListEl.appendChild(li);
-  });
-}
+/* =========  LIST RENDER  ========= */
 function formatDate(d) {
   return new Date(d).toLocaleDateString("en-US", {
     year: "numeric",
@@ -45,37 +28,39 @@ function formatDate(d) {
     day: "numeric",
   });
 }
-
-/* =========  OPEN BLOG POST  ========= */
-async function openPost(post) {
-  // swap pages
+function renderBlogList() {
+  blogListEl.innerHTML = "";
+  BLOGS.forEach((b) => {
+    const li = document.createElement("li");
+    li.className = "blog-card";
+    li.innerHTML = `
+      <h3>${b.title}</h3>
+      <span class="blog-date">${formatDate(b.date)}</span>
+      <span class="blog-tags">${b.tags.join(", ")}</span>`;
+    li.onclick = () => openPost(b);
+    blogListEl.appendChild(li);
+  });
+}
+/* =========  OPEN POST  ========= */
+async function openPost(b) {
   mainPage.classList.remove("active");
   blogReader.classList.add("active");
+  postTitleEl.textContent = b.title;
+  postMetaEl.textContent = `${formatDate(b.date)} • ${b.tags.join(" / ")}`;
 
-  // set title and meta
-  postTitleEl.textContent = post.title;
-  postMetaEl.textContent = `${formatDate(post.date)} • ${post.tags.join(
-    " / "
-  )}`;
-
-  // fetch raw Markdown from GitHub
-  const url = `https://raw.githubusercontent.com/Satyam-git-hub/Satyam-git-hub.github.io/main/blogs/${post.slug}.md`;
-  const md = await fetch(url).then((r) => r.text());
-
-  // convert to HTML via Marked.js
+  const rawURL = `https://raw.githubusercontent.com/Satyam-git-hub/Satyam-git-hub.github.io/main/blogs/${b.slug}.md`;
+  const md = await fetch(rawURL).then((r) => r.text());
   postContentEl.innerHTML = marked.parse(md, {
     mangle: false,
     headerIds: false,
   });
   window.scrollTo(0, 0);
 }
-
-/* =========  BACK TO LIST  ========= */
+/* =========  BACK  ========= */
 backToBlogs.onclick = () => {
   blogReader.classList.remove("active");
   mainPage.classList.add("active");
   window.location.hash = "#blogs";
 };
-
 /* =========  INIT  ========= */
 renderBlogList();
