@@ -6,6 +6,12 @@ const BLOGS = [
     date: "2025-07-23",
     tags: ["PQC", "Cryptography"],
   },
+  {
+    slug: "Architecting-a-Comprehensive-eBPF-Powered-Cryptographic-Inventory",
+    title: "Architecting a Comprehensive eBPF-Powered Cryptographic Inventory",
+    date: "2025-07-24",
+    tags: ["PQC", "CryptoInventory", "eBPF", "Observability"],
+  },
 ];
 
 /* ---------- DOM HOOKS ---------- */

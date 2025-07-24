@@ -10,37 +10,43 @@
         description:
           "Real-time network analyzer using eBPF maps for high-performance packet inspection and monitoring.",
         tech: ["eBPF", "C", "Linux Kernel"],
-        link: "https://github.com/Satyam-git-hub/ebpf-monitor",
+        link: "https://github.com/Satyam-git-hub/eBPF_process_monitor.git",
       },
       {
         title: "PQ-TLS Demo",
         description:
-          "TLS 1.3 implementation with Kyber + Dilithium hybrid post-quantum cryptographic suites.",
+          "TLS 1.3 implementation with Kyber key exchange and post-quantum cryptographic suites.",
         tech: ["Post-Quantum Crypto", "TLS", "C++"],
-        link: "https://github.com/Satyam-git-hub/pq-tls",
+        link: "https://github.com/Satyam-git-hub/kyber.git",
       },
       {
-        title: "AI-Powered 6G Scheduler",
-        description:
-          "Reinforcement learning algorithm for optimized 6G network resource allocation and scheduling.",
-        tech: ["AI", "6G", "Python", "RL"],
-        link: "https://github.com/Satyam-git-hub/6g-scheduler",
+        title: "HEXAeBPF",
+        description: "The Future of Interoperable eBPF Defined 5G Core (eDC).",
+        tech: ["Automation", "5G/6G", "eBPF", "Kubernetes"],
+        link: "https://github.com/ngkore/HEXAeBPF.git",
       },
     ],
     experience: [
       {
-        role: "Security Research Intern",
-        company: "QuantumSafe Labs",
-        period: "May 2024 – Aug 2024",
+        role: "Contributor",
+        company: "Ngkore",
+        period: "May 2023 – Present",
         description:
-          "Implemented lattice-based key exchange protocols in embedded firmware. Researched post-quantum cryptographic algorithms for IoT devices.",
+          "Research and development of HEXAeBPF and PQ-TLS. Worked on automating 5G/6G network resource allocation and scheduling.",
       },
       {
-        role: "Teaching Assistant",
-        company: "IIIT-Delhi",
-        period: "Jan 2024 – Apr 2024",
+        role: "Research Engineer",
+        company: "Ramanujan College(Delhi University)",
+        period: "Jan 2023 – Present",
         description:
           "Assisted in Networks & Systems course. Designed and implemented eBPF laboratory exercises for advanced networking concepts.",
+      },
+      {
+        role: "Research Intern",
+        company: "Coran Labs",
+        period: "April 2024 – May 2025",
+        description:
+          "Worked on eBPF packet monitoring and post-quantum cryptographic suites. Implemented TLS 1.3 with Kyber key exchange. between SMF and UPF",
       },
     ],
   };
