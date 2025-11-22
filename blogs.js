@@ -38,11 +38,17 @@ function renderList() {
     const li = document.createElement("li");
     li.className = "blog-card";
     li.innerHTML = `
-      <h3 class="blog-title">${p.title}</h3>
-      <div class="blog-meta">
-        <span class="blog-date">${fmt(p.date)}</span>
-        <span class="blog-tags">${p.tags.join(", ")}</span>
-      </div>`;
+      <div class="blog-content">
+        <h3 class="blog-title">${p.title}</h3>
+        <div class="blog-meta">
+          <span class="blog-date">${fmt(p.date)}</span>
+          <span class="blog-tags">${p.tags.join(", ")}</span>
+        </div>
+      </div>
+      <i class="ri-arrow-right-line" style="display: none;"></i>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="color: var(--text-secondary);">
+        <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/>
+      </svg>`;
     li.onclick = () => openPost(p);
     listEl.appendChild(li);
   });

@@ -51,6 +51,41 @@
     ],
   };
 
+  class ThemeManager {
+    constructor() {
+      this.themeToggle = document.getElementById("themeToggle");
+      this.html = document.documentElement;
+      this.init();
+    }
+
+    init() {
+      // Check for saved theme or system preference
+      const savedTheme = localStorage.getItem("theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+
+      const theme = savedTheme || systemTheme;
+      this.setTheme(theme);
+
+      // Event Listener
+      if (this.themeToggle) {
+        this.themeToggle.addEventListener("click", () => this.toggleTheme());
+      }
+    }
+
+    setTheme(theme) {
+      this.html.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    }
+
+    toggleTheme() {
+      const currentTheme = this.html.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      this.setTheme(newTheme);
+    }
+  }
+
   class PortfolioApp {
     constructor() {
       this.init();
@@ -66,12 +101,21 @@
     setupNavigation() {
       // Smooth scrolling for navigation links
       document
-        .querySelectorAll(".nav-link, .btn-primary, .btn-outline")
+        .querySelectorAll(".nav-link, .btn-primary, .btn-secondary")
         .forEach((link) => {
           link.addEventListener("click", (e) => {
             const href = link.getAttribute("href");
             if (href && href.startsWith("#")) {
               e.preventDefault();
+
+              // Close blog reader if open
+              const blogReader = document.getElementById("blogReader");
+              const mainPage = document.getElementById("mainPage");
+              if (blogReader && blogReader.classList.contains("active")) {
+                blogReader.classList.remove("active");
+                mainPage.classList.add("active");
+              }
+
               const target = document.querySelector(href);
               if (target) {
                 const navbarHeight =
@@ -138,7 +182,12 @@
                     <h3 class="project-title">${project.title}</h3>
                     <p class="project-description">${project.description}</p>
                     <div class="project-tech">${techTags}</div>
-                    <a href="${project.link}" target="_blank" class="project-link">View on GitHub →</a>
+                    <a href="${project.link}" target="_blank" class="project-link">
+                        View on GitHub 
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M16.004 9.414l-8.607 8.607-1.414-1.414 8.607-8.607-6.18 0v-2h9.594v9.594h-2v-6.18z"/>
+                        </svg>
+                    </a>
                 `;
 
         projectsGrid.appendChild(projectCard);
@@ -207,6 +256,7 @@
 
   // Initialize the app when DOM is loaded
   document.addEventListener("DOMContentLoaded", () => {
+    new ThemeManager();
     new PortfolioApp();
   });
 })();
